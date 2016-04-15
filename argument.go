@@ -26,7 +26,9 @@ func NewArgument(name string, vals map[string]interface{}) *Argument {
 }
 
 func (arg *Argument) Set(key string, val interface{}) {
-	arg.args[key] = fmt.Sprint(val)
+	if _, ok := arg.api["args"].(map[string]string)[key]; ok {
+		arg.args[key] = fmt.Sprint(val)
+	}
 }
 
 func (arg *Argument) URL() string {
